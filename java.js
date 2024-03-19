@@ -59,7 +59,8 @@ while (productos != 0) {
 
 }
 if (precio != 0) {
-    let pago = parseInt(prompt("¿Como desea abonar su compra?\n1- Efectivo/Transferencia\n2- Tarjeta de Debito\n3- Tarjeta de Credito\n0- Para cancelar operacion"));
+    let pago = parseInt(prompt("¿Como desea abonar su compra?\n1- Efectivo/Transferencia\n2- Tarjeta de Debito\n3- Tarjeta de Credito\n0- Para salir de la interfas"));
+    while (pago != 0){
         if (pago == 1) {
             alert("El total de tu compra es $" + impuDesc(iva + impPais, descEfecTransf));
         } else if (pago == 2) {
@@ -69,6 +70,8 @@ if (precio != 0) {
         } else {
             alert("Por favor seleccione un metodo de pago por favor")
         }
+        pago = parseInt(prompt("¿Cómo desea abonar su compra?\n1- Efectivo/Transferencia\n2- Tarjeta de Débito\n3- Tarjeta de Crédito\n0- Para salir de la interfas"));
+    }
 }
 function impuDesc(impuestos, descuentos) {
     let totalImpuestos = precio * (1 + impuestos);
