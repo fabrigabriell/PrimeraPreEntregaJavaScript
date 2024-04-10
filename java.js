@@ -1,84 +1,53 @@
-let bienvenida = prompt("¡Bienvenido a Kick Off Zone! Aqui encontraras los mejores botines del mercado al mejor precio\n Nos permites tu nombre?");
+let opciones = parseInt(prompt("Bienvenido a KickOffZone la mejor tienda de Futbol del mercado, ingrese como desea buscar sus botines\n1-Buscar por Marca\n2-Buscar por nombre\n3-Cuantos modelos hay disponibles\n0-Para cancelar operacion"))
 
-alert("Mucho gusto " + bienvenida + " estamos encantados de que nos visites a nuestra tienda online!");
-
-let productos = parseInt(prompt("En nuestra tienda hay una gran variedad de botines de las mejores marcas, ¿Que es lo que deseas buscar?\nGama Alta:\n1- BOTINES X CRAZYFAST MESSI ELITE TERRENO FIRME, Precio: $369.999\n2- PREDATOR ACCURACY+ FG, Precio: $449.999 \n3- BOTINES COPA PURE+ TERRENO FIRME, Precio: $314.999\nGama Media:\n4- BOTINES PREDATOR ACCURACY.2 TERRENO FIRME, Precio: $183.999 \n5- BOTINES COPA PURE.3 TERRENO FIRME, Precio: $143.999 \n6- BOTINES COPA PURE II.2 TERRENO FIRME, Precio: $229.999 \nGama Baja\n7- BOTINES COPA SENSE.3 TERRENO FIRME, Precio: $51.999 \n-8 BOTINES PREDATOR ACCURACY.4 MULTITERRENO, Precio: $73.999 \n9- BOTINES X SPEEDPORTAL.3 TERRENO FIRME, Precio: $39.999 \n0- Para salir de la interfas"));
-
-let precio = 0;
-const iva = 0.21;
-const impPais = 0.08;
-const credito = 0.30;
-const descEfecTransf = 0.15;
-
-
-
-while (productos != 0) {
-    switch (productos) {
+while(opciones != 0){
+    switch(opciones){
         case 1:
-            precio += 369999
-            alert("Agregaste BOTINES X CRAZYFAST MESSI ELITE TERRENO FIRME a tu carrito, tienes sumado en total $" + precio);
+            let marcas = parseInt(prompt("¿Que marca desea buscar?\n1-Adidas\n2-Nike\n3-Puma\nIngrese el numero de la opcion que desee"));
+
+            filtrarMarca(marcas);
             break;
         case 2:
-            precio += 449999
-            alert("Agregaste PREDATOR ACCURACY+ FG a tu carrito, tienes sumado en total $" + precio);
+            let botines = prompt("Ingrese el Nombre del botin que desea buscar y este disponible");
+
+            if (botines != ""){
+                buscador(botines);
+            } else{
+                alert("Por Favor ingresa el nombre de algun botin disponible")
+            }
             break;
         case 3:
-            precio += 314999
-            alert("Agregaste BOTINES COPA PURE+ TERRENO FIRME a tu carrito, tienes sumado en total $" + precio);
-            break;
-        case 4:
-            precio += 183999
-            alert("Agregaste BOTINES PREDATOR ACCURACY.2 TERRENO FIRME a tu carrito, tienes sumado en total $" + precio);
-            break;
-        case 5:
-            precio += 143999
-            alert("Agregaste BOTINES COPA PURE.3 TERRENO FIRME a tu carrito, tienes sumado en total $" + precio);
-            break;
-        case 6:
-            precio += 229999
-            alert("Agregaste BOTINES COPA PURE II.2 TERRENO FIRME a tu carrito, tienes sumado en total $" + precio);
-            break;
-        case 7:
-            precio += 51999
-            alert("Agregaste BOTINES COPA SENSE.3 TERRENO FIRME a tu carrito, tienes sumado en total $" + precio);
-            break;
-        case 8:
-            precio += 73999
-            alert("Agregaste BOTINES PREDATOR ACCURACY.4 MULTITERRENO a tu carrito, tienes sumado en total $" + precio);
-            break;
-        case 9:
-            precio += 39999
-            alert("Agregaste BOTINES X SPEEDPORTAL.3 TERRENO FIRME a tu carrito, tienes sumado en total $" + precio);
+            contadorStock();
             break;
         default:
-            alert("Codigo Invalido Intentelo Nuevamente")
-            break;
+            alert("Por Favor ingrese una opcion valida");
     }
-
-    productos = parseInt(prompt("En nuestra tienda hay una gran variedad de botines de las mejores marcas, ¿Que es lo que deseas buscar?\nGama Alta:\n1- BOTINES X CRAZYFAST MESSI ELITE TERRENO FIRME, Precio: $369.999\n2- PREDATOR ACCURACY+ FG, Precio: $449.999 \n3- BOTINES COPA PURE+ TERRENO FIRME, Precio: $314.999\nGama Media:\n4- BOTINES PREDATOR ACCURACY.2 TERRENO FIRME, Precio: $183.999 \n5- BOTINES COPA PURE.3 TERRENO FIRME, Precio: $143.999 \n6- BOTINES COPA PURE II.2 TERRENO FIRME, Precio: $229.999 \nGama Baja\n7- BOTINES COPA SENSE.3 TERRENO FIRME, Precio: $51.999 \n-8 BOTINES PREDATOR ACCURACY.4 MULTITERRENO, Precio: $73.999 \n9- BOTINES X SPEEDPORTAL.3 TERRENO FIRME, Precio: $39.999 \n0- Para salir de la interfas"));
-
+    opciones = parseInt(prompt("Bienvenido a KickOffZone la mejor tienda de Futbol del mercado, ingrese como desea buscar sus botines\n1-Buscar por Marca\n2-Buscar por nombre\n3-Cuantos modelos hay disponibles\n0-Para cancelar operacion"))
 }
-if (precio != 0) {
-    let pago = parseInt(prompt("¿Como desea abonar su compra?\n1- Efectivo/Transferencia\n2- Tarjeta de Debito\n3- Tarjeta de Credito\n0- Para salir de la interfas"));
-    while (pago != 0){
-        if (pago == 1) {
-            alert("El total de tu compra es $" + impuDesc(iva + impPais, descEfecTransf));
-        } else if (pago == 2) {
-            alert("El total de tu compra es $" + impuDesc(iva + impPais, 0));
-        } else if (pago == 3) {
-            alert("El total de tu compra es $" + impuDesc(iva + impPais + credito, 0));
-        } else {
-            alert("Por favor seleccione un metodo de pago por favor")
-        }
-        pago = parseInt(prompt("¿Cómo desea abonar su compra?\n1- Efectivo/Transferencia\n2- Tarjeta de Débito\n3- Tarjeta de Crédito\n0- Para salir de la interfas"));
-    }
+
+function filtrarMarca(marcaSaleccionada){
+    let filtros=[];
+    if (marcaSaleccionada == 1){
+        filtros = stock.filter(marca => marca.marca.toLowerCase() == "adidas");
+    }else if(marcaSaleccionada == 2){
+        filtros = stock.filter(marca => marca.marca.toLowerCase() == "nike");
+    }else if(marcaSaleccionada == 3){
+        filtros = stock.filter(marca => marca.marca.toLowerCase() == "puma");
+    }else {
+        alert("Por Favor ingrese uno de los codigos que se encuentra en pantalla");
+    }console.table(filtros)
 }
-function impuDesc(impuestos, descuentos) {
-    let totalImpuestos = precio * (1 + impuestos);
-    let totalImpuDesc;
-    if (descuentos != 0) {
-        totalImpuDesc = totalImpuestos * (1 - descuentos)
-    } else {
-        totalImpuDesc = totalImpuestos;
-    } return totalImpuDesc;
+
+function buscador(nombre){
+    let botinBuscado = stock.find(marca => marca.botines.toLowerCase().includes(nombre.toLowerCase()));
+
+    if (botinBuscado != undefined){
+    console.log("El botin que se encontro es el:\nID:"+botinBuscado.id+"\nNombre:"+botinBuscado.botines+"\nMarca:"+botinBuscado.marca+"\nPrecio:"+botinBuscado.precio+"\nStock Disponible: "+botinBuscado.stock);
+} else {
+    console.log("El botin que ingresaste no fue enconrado");
+}
+}
+
+function contadorStock(){
+    console.log("Tenemos " +stock.length+" modelos mas que puedes ver!");
 }
