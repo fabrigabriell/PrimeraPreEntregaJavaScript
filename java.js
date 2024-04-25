@@ -1,53 +1,119 @@
-let opciones = parseInt(prompt("Bienvenido a KickOffZone la mejor tienda de Futbol del mercado, ingrese como desea buscar sus botines\n1-Buscar por Marca\n2-Buscar por nombre\n3-Cuantos modelos hay disponibles\n0-Para cancelar operacion"))
+console.table(stock);
+let carrito = [];
+let totalPrecio = 0;
 
-while(opciones != 0){
-    switch(opciones){
-        case 1:
-            let marcas = parseInt(prompt("¿Que marca desea buscar?\n1-Adidas\n2-Nike\n3-Puma\nIngrese el numero de la opcion que desee"));
+const fecha = document.getElementsByTagName('h3');
 
-            filtrarMarca(marcas);
-            break;
-        case 2:
-            let botines = prompt("Ingrese el Nombre del botin que desea buscar y este disponible");
+console.log(fecha[0]); 
 
-            if (botines != ""){
-                buscador(botines);
-            } else{
-                alert("Por Favor ingresa el nombre de algun botin disponible")
-            }
-            break;
-        case 3:
-            contadorStock();
-            break;
-        default:
-            alert("Por Favor ingrese una opcion valida");
+fecha[0].innerText = new Date().toLocaleDateString();
+
+// Cantidad de productos en stock
+const productosDisp = document.getElementById('cantidadProductosTotales');
+
+console.log(productosDisp[0]);
+
+productosDisp.value = stock.length;
+
+//Cards de productos
+
+const cardsProd = document.getElementById('cards');
+const elCarrito = document.getElementById('famosoCarrito');
+
+cardsProd.className = 'row container gap-3 mx-auto justify-content-center '
+
+function catalogo(listaStock){
+
+    for (const prod of listaStock){
+
+    cardsProd.innerHTML += `<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src=${prod.img} alt="Card image cap">
+    <div class="card-body">
+    <h5 class="card-title">${prod.botines}</h5>
+    <p class="card-text">Precio: $ ${prod.precio}</p>
+    <button class="btn btn-primary carrito" id=${prod.id}>Agregar al Carrito</button>
+</div>
+</div>`
+}
+
+const buttons = document.getElementsByClassName('carrito');
+for(const button of buttons){
+    button.addEventListener('click',()=>{
+        console.log('Seleccionaste el: '+button.id);
+
+        const añadirCarrito = listaStock.find(prod => prod.id == button.id)
+        console.log(añadirCarrito);
+
+        añadirAlCarrito(añadirCarrito);
+    })
+}
+}
+catalogo(stock);
+
+function añadirAlCarrito(stock){
+    carrito.push(stock);
+    console.table(carrito);
+    elCarrito.innerHTML+=`
+    <tr>
+        <td>${stock.botines}</td>
+        <td>${stock.precio}</td>
+        <td>${stock.stock}</td>
+    </tr>
+    `
+    let totalPrice = 0;
+    for (const item of carrito) {
+        totalPrice += item.precio;
     }
-    opciones = parseInt(prompt("Bienvenido a KickOffZone la mejor tienda de Futbol del mercado, ingrese como desea buscar sus botines\n1-Buscar por Marca\n2-Buscar por nombre\n3-Cuantos modelos hay disponibles\n0-Para cancelar operacion"))
+
+    const sumaTotal = document.getElementById('cart-total');
+    sumaTotal.textContent = `$${totalPrice.toFixed(2)}`;
 }
 
-function filtrarMarca(marcaSaleccionada){
-    let filtros=[];
-    if (marcaSaleccionada == 1){
-        filtros = stock.filter(marca => marca.marca.toLowerCase() == "adidas");
-    }else if(marcaSaleccionada == 2){
-        filtros = stock.filter(marca => marca.marca.toLowerCase() == "nike");
-    }else if(marcaSaleccionada == 3){
-        filtros = stock.filter(marca => marca.marca.toLowerCase() == "puma");
-    }else {
-        alert("Por Favor ingrese uno de los codigos que se encuentra en pantalla");
-    }console.table(filtros)
+function estaModoOscuroActivado() {
+    return localStorage.getItem('darkMode') === 'true';
 }
 
-function buscador(nombre){
-    let botinBuscado = stock.find(marca => marca.botines.toLowerCase().includes(nombre.toLowerCase()));
+const interruptorModoOscuro = document.getElementById('darkModeToggle');
 
-    if (botinBuscado != undefined){
-    console.log("El botin que se encontro es el:\nID:"+botinBuscado.id+"\nNombre:"+botinBuscado.botines+"\nMarca:"+botinBuscado.marca+"\nPrecio:"+botinBuscado.precio+"\nStock Disponible: "+botinBuscado.stock);
-} else {
-    console.log("El botin que ingresaste no fue enconrado");
-}
+interruptorModoOscuro.addEventListener('change', () => {
+    const estaModoOscuro = interruptorModoOscuro.checked;
+    localStorage.setItem('darkMode', estaModoOscuro.toString());
+    aplicarModoOscuro(estaModoOscuro);
+});
+
+function aplicarModoOscuro(estaModoOscuro) {
+    const cuerpoPagina = document.body;
+    if (estaModoOscuro) {
+        cuerpoPagina.classList.add('dark-mode');
+    } else {
+        cuerpoPagina.classList.remove('dark-mode');
+    }
 }
 
-function contadorStock(){
-    console.log("Tenemos " +stock.length+" modelos mas que puedes ver!");
-}
+window.addEventListener('load', () => {
+    const estaModoOscuro = estaModoOscuroActivado();
+    interruptorModoOscuro.checked = estaModoOscuro;
+    aplicarModoOscuro(estaModoOscuro);
+});
+
+function getUserName() {
+    return localStorage.getItem('userName');
+  }
+  
+  function greetUser() {
+    const userName = getUserName();
+    if (userName) {
+      alert(`¡Hola, ${userName}!`);
+    } else {
+      const newUserName = prompt('Bienvenido a KickOffZone ¿Cual es tu nombre?');
+      if (newUserName) {
+        localStorage.setItem('userName', newUserName);
+        alert(`Hola, ${newUserName}! espero disfrutes mucho de nuestros productos!`);
+      }
+    }
+  }
+ 
+  window.addEventListener('load', () => {
+    greetUser();
+  });
+  

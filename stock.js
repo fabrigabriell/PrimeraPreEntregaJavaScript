@@ -5,7 +5,8 @@ const stock = [
     marca:"Adidas",
     precio: 369999,
     disponibilidad:true,
-    stock: 10
+    stock: 10,
+    img: "img/crazyFast.jpg"
 },
 {
     id:2,
@@ -13,7 +14,8 @@ const stock = [
     marca:"Adidas",
     precio:449999,
     disponibilidad:true,
-    stock: 32
+    stock: 32,
+    img: "img/accuracy.jpg"
 },
 {
     id:3,
@@ -21,48 +23,55 @@ const stock = [
     marca:"Adidas",
     precio: 314999,
     disponibilidad:true,
-    stock: 21
+    stock: 21,
+    img:"img/copaPure.jpg"
 },{
     id:4,
     botines: "Nike Phantom GX Elite",
     marca:"Nike",
     precio: 419999,
     disponibilidad:true,
-    stock: 14
+    stock: 14,
+    img:"img/phantom.jpg"
 },{
     id:5,
     botines: "Nike Mercurial Superfly 8 Elite - Player Edition",
     marca:"Nike",
     precio: 224999,
     disponibilidad:true,
-    stock: 54
+    stock: 54,
+    img:"img/superFly8.jpg"
 },{
     id:6,
     botines: "Nike Phantom Luna",
     marca:"Nike",
     precio: 254999,
     disponibilidad:true,
-    stock: 27
+    stock: 27,
+    img:"img/phantomLuna.jpg"
 },{
     id:7,
     botines: "Botín de fútbol FUTURE 7 ULTIMATE MxSG",
     marca:"Puma",
     precio: 279999,
     disponibilidad:true,
-    stock: 9
+    stock: 9,
+    img:"img/future7.jpg"
 },{
     id:8,
     botines: "Botín ULTRA ULTIMATE MxSG",
     marca:"Puma",
     precio: 223999,
     disponibilidad:true,
-    stock:17
+    stock:17,
+    img:"img/ultraUltimate.jpg"
 },{
     id:9,
     botines: "Botines KING PRO FG/AG",
     marca:"Puma",
     precio: 159999,
     disponibilidad:true,
-    stock: 6
+    stock: 6,
+    img:"img/kingPro.jpg"
 }
 ]
